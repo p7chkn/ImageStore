@@ -45,7 +45,7 @@ func main() {
 
 	g, ctx := errgroup.WithContext(ctx)
 
-	httpHandler := services.SetUpRouter(repo, log, cfg.ServerAddress)
+	httpHandler := services.SetUpRouter(repo, log, cfg.ServerAddress, cfg.PathToFile)
 	grpcHandler := handlers.GrpcHandlerNew(repo, log, cfg.ServerAddress)
 
 	g.Go(func() error {

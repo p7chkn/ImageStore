@@ -33,13 +33,13 @@ func (gh *GrpcHandler) SaveFile(ctx context.Context, in *pb.FileRequest) (*pb.Fi
 	fileName, err := utils.FormatFileName(in.GetTitle())
 	if err != nil {
 		gh.log.Error(err.Error())
-		return nil, errors.New("error with open file")
+		return nil, errors.New(err.Error())
 	}
 	if err := gh.repo.SaveImage(imageData, fileName); err != nil {
 		gh.log.Error(err.Error())
-		return nil, errors.New("error with save file")
+		return nil, errors.New(err.Error())
 	}
 
-	message := "http://" + gh.serverURL + "/api/image/" + fileName
+	message := "http://" + gh.serverURL + "/file/image/" + fileName
 	return &pb.FileResponse{Status: "OK", Url: message}, nil
 }

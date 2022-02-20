@@ -1,7 +1,14 @@
 package utils
 
-import "strings"
+import (
+	"goImageStore/iternal/validators"
+	"strings"
+)
 
 func FormatFileName(name string) (string, error) {
-	return strings.ReplaceAll(name, " ", ""), nil
+	result := strings.ReplaceAll(name, " ", "")
+	if err := validators.FileNameValidate(result); err != nil {
+		return "", err
+	}
+	return result, nil
 }
