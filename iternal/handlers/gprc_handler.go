@@ -9,7 +9,7 @@ import (
 	"goImageStore/pb"
 )
 
-func GrpcHandlerNew(repo RepositoryInterface, log *zap.SugaredLogger, serverURL string) *GrpcHandler {
+func GrpcHandlerNew(repo RepositoryInterfaceGrpc, log *zap.SugaredLogger, serverURL string) *GrpcHandler {
 	return &GrpcHandler{
 		repo:      repo,
 		log:       log,
@@ -19,7 +19,7 @@ func GrpcHandlerNew(repo RepositoryInterface, log *zap.SugaredLogger, serverURL 
 
 type GrpcHandler struct {
 	pb.UnimplementedFileServer
-	repo      RepositoryInterface
+	repo      RepositoryInterfaceGrpc
 	serverURL string
 	log       *zap.SugaredLogger
 }

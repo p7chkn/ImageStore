@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"github.com/go-chi/chi/v5"
 	"go.uber.org/zap"
-	"io/ioutil"
 	"net/http"
 )
 
@@ -17,13 +16,13 @@ type SaveResponse struct {
 }
 
 type Handler struct {
-	repo          RepositoryInterface
+	repo          RepositoryInterfaceHttp
 	log           *zap.SugaredLogger
 	ServerAddress string
 	pathToFile    string
 }
 
-func HttpHandlerNew(repo RepositoryInterface, log *zap.SugaredLogger, ServerAddress string, pathToFile string) *Handler {
+func HttpHandlerNew(repo RepositoryInterfaceHttp, log *zap.SugaredLogger, ServerAddress string, pathToFile string) *Handler {
 	return &Handler{
 		repo:          repo,
 		log:           log,
@@ -37,14 +36,13 @@ func (h *Handler) Ping(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) GetImage(w http.ResponseWriter, r *http.Request) {
-	name := chi.URLParam(r, "imageName")
-	fileBytes, err := ioutil.ReadFile(h.pathToFile + name)
+	file, err := h.repo.GetImage(chi.URLParam(r, "imageName"))
 	if err != nil {
 		h.log.Error(err)
 		return
 	}
 	w.Header().Set("Content-Type", "image/png")
-	w.Write(fileBytes)
+	w.Write(file)
 
 }
 

@@ -6,7 +6,7 @@ import (
 	"goImageStore/iternal/handlers"
 )
 
-func SetUpRouter(repo handlers.RepositoryInterface, log *zap.SugaredLogger, ServerAddress string, pathToFile string) *chi.Mux {
+func SetUpRouter(repo handlers.RepositoryInterfaceHttp, log *zap.SugaredLogger, ServerAddress string, pathToFile string) *chi.Mux {
 	r := chi.NewRouter()
 	handler := handlers.HttpHandlerNew(repo, log, ServerAddress, pathToFile)
 	r.Get("/file/ping", handler.Ping)

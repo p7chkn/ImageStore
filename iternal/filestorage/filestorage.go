@@ -2,6 +2,7 @@ package filestorage
 
 import (
 	"bytes"
+	"io/ioutil"
 	"os"
 )
 
@@ -25,4 +26,12 @@ func (fs *FileStorage) SaveImage(imageData bytes.Buffer, fileName string) error 
 		return err
 	}
 	return nil
+}
+
+func (fs *FileStorage) GetImage(imageName string) ([]byte, error) {
+	fileBytes, err := ioutil.ReadFile(fs.pathToFile + imageName)
+	if err != nil {
+		return []byte{}, err
+	}
+	return fileBytes, nil
 }
