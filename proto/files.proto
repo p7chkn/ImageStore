@@ -1,0 +1,16 @@
+syntax = "proto3";
+package files;
+option go_package = "/files";
+
+service File {
+  rpc SaveFile (FileRequest) returns (FileResponse) {}
+}
+message FileRequest {
+  string title = 1;
+  bytes file = 2;
+}
+
+message FileResponse {
+  string status = 1;
+  string url = 2;
+}
