@@ -1,0 +1,16 @@
+version: '3.7'
+
+volumes:
+  images:
+
+services:
+  go_service:
+    container_name: go_service
+    build: ./
+    ports:
+      - "8080:8080"
+      - "50051:50051"
+    command: /image_store
+    volumes:
+      - /home/p7chkn/images:/images
+#     - /Users/pl_chkn/images:/images

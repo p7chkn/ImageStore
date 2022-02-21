@@ -5,9 +5,9 @@ import (
 )
 
 const (
-	ServerAddress = "localhost:8080"
+	ServerAddress = "0.0.0.0:8080"
 	GrpcPort      = 50051
-	PathToFile    = "/Users/pl_chkn/Dev/Go/ImageStore/downloaded/"
+	PathToFile    = "/images/"
 	//DataBaseURI  = "postgresql://postgres:1234@localhost:5432?sslmode=disable"
 	//AccrualSystemAdress        = "http://localhost:8080/"
 	//AccessTokenLiveTimeMinutes = 15
