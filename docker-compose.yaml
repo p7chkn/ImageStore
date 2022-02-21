@@ -15,8 +15,9 @@ services:
       - /home/p7chkn/images:/images
 #     - /Users/pl_chkn/images:/images
     networks:
-      - first-startup-network
+      - my-first-startup-network
 
 networks:
-  first-startup-network:
-    - external: true
+  my-first-startup-network:
+    external:
+      name: first-startup-network
