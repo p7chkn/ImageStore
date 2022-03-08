@@ -13,11 +13,11 @@ services:
     command: /image_store
     volumes:
       - /home/p7chkn/images:/images
-#     - /Users/pl_chkn/images:/images
+    #     - /Users/pl_chkn/images:/images
     networks:
       - my-first-startup-network
 
 networks:
   my-first-startup-network:
     external:
-      name: first-startup-network
+      name: p7chkn_first-startup-network
