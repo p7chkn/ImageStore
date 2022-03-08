@@ -2,9 +2,10 @@ package handlers
 
 import (
 	"encoding/json"
+	"net/http"
+
 	"github.com/go-chi/chi/v5"
 	"go.uber.org/zap"
-	"net/http"
 )
 
 type ErrorMessage struct {
@@ -39,6 +40,7 @@ func (h *Handler) GetImage(w http.ResponseWriter, r *http.Request) {
 	file, err := h.repo.GetImage(chi.URLParam(r, "imageName"))
 	if err != nil {
 		h.log.Error(err)
+		w.WriteHeader(http.StatusNotFound)
 		return
 	}
 	w.Header().Set("Content-Type", "image/png")

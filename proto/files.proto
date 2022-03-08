@@ -1,16 +1,26 @@
 syntax = "proto3";
 package files;
-option go_package = "/files";
+option go_package = "/pb";
 
 service File {
-  rpc SaveFile (FileRequest) returns (FileResponse) {}
+  rpc SaveFile (CreateRequest) returns (CreateResponse) {}
+  rpc DeleteFile (DeleteRequest) returns (DeleteResponse) {}
 }
-message FileRequest {
+
+message CreateRequest {
   string title = 1;
   bytes file = 2;
 }
 
-message FileResponse {
+message CreateResponse {
   string status = 1;
   string url = 2;
+}
+
+message DeleteRequest{
+  string filename = 1;
+}
+
+message DeleteResponse{
+  string status = 1;
 }

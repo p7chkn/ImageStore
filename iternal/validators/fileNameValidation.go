@@ -3,6 +3,7 @@ package validators
 import (
 	"errors"
 	"path/filepath"
+	"strings"
 )
 
 var (
@@ -13,7 +14,7 @@ func FileNameValidate(name string) error {
 	if len(name) > 60 {
 		return errors.New("too long file name")
 	}
-	if !inAllowedExtensions(extensions, filepath.Ext(name)) {
+	if !inAllowedExtensions(extensions, strings.ToLower(filepath.Ext(name))) {
 		return errors.New("wrong extension")
 	}
 	return nil

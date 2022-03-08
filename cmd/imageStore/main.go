@@ -9,14 +9,15 @@ import (
 	"goImageStore/iternal/handlers"
 	"goImageStore/iternal/logger"
 	"goImageStore/pb"
-	"golang.org/x/sync/errgroup"
-	"google.golang.org/grpc"
 	"net"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
+
+	"golang.org/x/sync/errgroup"
+	"google.golang.org/grpc"
 
 	//"database/sql"
 	//"goImageStore/cmd/imageStore/configuration"

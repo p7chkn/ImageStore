@@ -2,9 +2,10 @@ package interceptors
 
 import (
 	"context"
+	"time"
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/grpclog"
-	"time"
 )
 
 func logInterceptor(ctx context.Context,

@@ -15,7 +15,6 @@ type FileStorage struct {
 }
 
 func (fs *FileStorage) SaveImage(imageData bytes.Buffer, fileName string) error {
-
 	file, err := os.OpenFile(fs.pathToFile+fileName, os.O_WRONLY|os.O_CREATE, 0666)
 	if err != nil {
 		return err
@@ -34,4 +33,8 @@ func (fs *FileStorage) GetImage(imageName string) ([]byte, error) {
 		return []byte{}, err
 	}
 	return fileBytes, nil
+}
+
+func (fs *FileStorage) DeleteImage(fileName string) error {
+	return os.Remove(fs.pathToFile + fileName)
 }

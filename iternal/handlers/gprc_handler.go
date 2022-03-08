@@ -4,9 +4,10 @@ import (
 	"bytes"
 	"context"
 	"errors"
-	"go.uber.org/zap"
 	"goImageStore/iternal/utils"
 	"goImageStore/pb"
+
+	"go.uber.org/zap"
 )
 
 func GrpcHandlerNew(repo RepositoryInterfaceGrpc, log *zap.SugaredLogger, serverURL string) *GrpcHandler {
@@ -24,7 +25,7 @@ type GrpcHandler struct {
 	log       *zap.SugaredLogger
 }
 
-func (gh *GrpcHandler) SaveFile(ctx context.Context, in *pb.FileRequest) (*pb.FileResponse, error) {
+func (gh *GrpcHandler) SaveFile(ctx context.Context, in *pb.CreateRequest) (*pb.CreateResponse, error) {
 	file := in.GetFile()
 
 	imageData := bytes.Buffer{}
@@ -41,5 +42,13 @@ func (gh *GrpcHandler) SaveFile(ctx context.Context, in *pb.FileRequest) (*pb.Fi
 	}
 
 	message := "http://" + gh.serverURL + "/file/image/" + fileName
-	return &pb.FileResponse{Status: "OK", Url: message}, nil
+	return &pb.CreateResponse{Status: "OK", Url: message}, nil
+}
+
+func (gh *GrpcHandler) DeleteFile(ctx context.Context, in *pb.DeleteRequest) (*pb.DeleteResponse, error) {
+	err := gh.repo.DeleteImage(in.GetFilename())
+	if err != nil {
+		return nil, err
+	}
+	return &pb.DeleteResponse{Status: "OK"}, nil
 }
