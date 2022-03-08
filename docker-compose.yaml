@@ -6,7 +6,7 @@ volumes:
 services:
   go_service:
     container_name: go_service
-    build: ./
+    image: 'p1chkn/image_store:latest'
     ports:
       - "8080:8080"
       - "50051:50051"
